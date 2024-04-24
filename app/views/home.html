@@ -95,9 +95,8 @@
         <script src="Controllers/home.js"></script>
         <script src="Controllers/matchPet.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const mobileScreen = window.matchMedia("(max-width: 990px)");
-
+            const mobileScreen = window.matchMedia("(max-width: 990px )");
+            $(document).ready(function () {
                 $(".dashboard-nav-dropdown-toggle").click(function () {
                     $(this).closest(".dashboard-nav-dropdown")
                         .toggleClass("show")
@@ -107,7 +106,6 @@
                         .siblings()
                         .removeClass("show");
                 });
-
                 $(".menu-toggle").click(function () {
                     if (mobileScreen.matches) {
                         $(".dashboard-nav").toggleClass("mobile-show");
@@ -115,45 +113,26 @@
                         $(".dashboard").toggleClass("dashboard-compact");
                     }
                 });
+            });
+            // Selecciona todos los elementos de la barra de navegación
+            var navItems = document.querySelectorAll('.dashboard-nav-item');
+            debugger;
+            // Agrega un evento de clic a cada elemento
+            navItems.forEach(function(item) {
 
-                // Selecciona todos los elementos de la barra de navegación
-                var navItems = document.querySelectorAll('.dashboard-nav-item');
-                
-                // Agrega un evento de clic a cada elemento
-                navItems.forEach(function(item) {
-                    item.addEventListener('click', function(e) {
-                        // Evita el comportamiento predeterminado del enlace
-                        e.preventDefault();
+                item.addEventListener('click', function(e) {
+                    // Evita el comportamiento predeterminado del enlace
+                    e.preventDefault();
 
-                        // Elimina la clase 'active' de todos los elementos
-                        navItems.forEach(function(item) {
-                            item.classList.remove('active');
-                        });
-
-                        // Agrega la clase 'active' al elemento que se ha hecho clic
-                        this.classList.add('active');
-
-                        // Obtiene el id del elemento clicado
-                        var itemId = this.id;
-
-                        // Construye la ruta del script basada en el id del elemento
-                        var scriptSrc = itemId + '.js';
-
-                        // Elimina el script previamente cargado, si existe
-                        var existingScript = document.querySelector('script[src="' + scriptSrc + '"]');
-                        if (existingScript) {
-                            existingScript.remove();
-                        }
-
-                        // Crea un nuevo script y lo agrega al cuerpo del documento
-                        var script = document.createElement('script');
-                        script.src = scriptSrc;
-                        document.body.appendChild(script);
+                    // Elimina la clase 'active' de todos los elementos
+                    navItems.forEach(function(item) {
+                        item.classList.remove('active');
                     });
+
+                    // Agrega la clase 'active' al elemento que se ha hecho clic
+                    this.classList.add('active');
                 });
             });
-
-
         </script>
         
     </body>
